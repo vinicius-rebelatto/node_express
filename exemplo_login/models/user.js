@@ -24,7 +24,3 @@ module.exports = (sequelize) => {
     });
     return User;
 }
-
-
-
-module.exports = User;
