@@ -19,4 +19,15 @@ router.post('/novoUsuario', function(req, res){
   UserController.create(req,res);
 });
 
+//Rota para localizar um usuário
+router.get('/localizaTodosUsuarios', function(req,res,next){
+  UserController.localizaTodosUsuarios(req, res)
+})
+
+//Rota para localizar um usuário
+router.get('/localizaPeloID', function(req,res,next){
+  UserController.localizaPeloID(req, res)
+})
+
+
 module.exports = router;

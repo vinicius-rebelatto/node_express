@@ -1,3 +1,4 @@
+
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -27,7 +28,7 @@ async function ApplyMigrations(){
             alter:true
         };
     
-        db.sequelize.sync({
+        await db.sequelize.sync({
             alter: migration_config.alter
         });
         console.log('Sincronizado com susexo');
