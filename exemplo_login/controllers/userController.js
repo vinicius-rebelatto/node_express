@@ -40,7 +40,17 @@ class userController{
         {
             res.status(500).json({error: 'ID não encontrado'})
         }
-        
+    }
+
+    async login(req, res){
+        const {id, senha} = req.body;
+        try{
+            const { user, token } = await this.userService.login(id, senha);
+            res.status(200).json({ token });
+        }
+        catch(error){
+            res.status(500).json({error: error.message});
+        }
     }
 }
 module.exports = userController;

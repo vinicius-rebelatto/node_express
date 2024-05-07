@@ -1,3 +1,10 @@
+//Service/userService
+const jwt = require('jsonwebtoken');
+const secret = 'esegredoviu'; // Substitua por sua própria chave secreta
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const AuthService = require('./auth'); // Caminho para o arquivo auth.js
+const authService = new AuthService();
 
 class userService{
     //Construtor da classe recebe a userModel
@@ -7,11 +14,12 @@ class userService{
 
     async create(nome, email, senha){
         try{
+            const hashedPassword = await bcrypt.hash(senha, saltRounds);
             const novoUser = await this.User.create(
                 {
                     nome:nome,
                     email:email,
-                    senha:senha
+                    senha:hashedPassword
                 }
             );
             return novoUser ? novoUser : null
@@ -48,6 +56,28 @@ class userService{
         }
         catch(error)
         {
+            throw error;
+        }
+    }
+
+    async login(id, senha){
+        try{
+            const user = await this.User.findOne({ where: { id: id } });
+            if(user){
+                const match = await bcrypt.compare(senha, user.senha);
+                if(match){
+                    const token = authService.generateToken(user.id);
+                    return { user, token };
+                }
+                else{
+                    throw new Error('Senha incorreta');
+                }
+            }
+            else{
+                throw new Error('Usuário não encontrado');
+            }
+        }
+        catch(error){
             throw error;
         }
     }

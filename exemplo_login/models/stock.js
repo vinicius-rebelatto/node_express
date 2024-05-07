@@ -1,22 +1,21 @@
-// ./models/product.js
+// ./models/stock.js
 
 const Sequelize = require('sequelize');
 module.exports = (sequelize) => {
-    const Product = sequelize.define('Product', {
+    const Stock = sequelize.define('Stock', {
         id:{
             type: Sequelize.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-        nome:{
-            type: Sequelize.STRING,
+        productId:{
+            type: Sequelize.INTEGER,
             allowNull: false,
         },
-        preco:{
-            type: Sequelize.FLOAT,
+        quantidade:{
+            type: Sequelize.INTEGER,
             allowNull: false,
         }
     });
-    return Product;
+    return Stock;
 }
-
