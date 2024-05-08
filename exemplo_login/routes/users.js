@@ -2,10 +2,23 @@ var express = require('express');
 var router = express.Router();
 
 const db = require('../models');
+
+
+//Chamada das classes de usuário
+
 const userService = require('../services/userService');//Classe
 const UserService = new userService(db.User);//Contrução do objeto
 const userController = require('../controllers/userController');//Classe
 const UserController = new userController(UserService);//Contrução do objeto
+
+//Chamada das classes de deposito
+
+const depositoService = require('../services/depositoService');//Classe
+const DepositoService = new depositoService(db.Deposito);//Contrução do objeto
+const depositoController = require('../controllers/depositoController');//Classe
+const DepositoController = new depositoController(DepositoService);//Contrução do objeto
+
+
 const AuthService = require('../services/auth'); // Caminho para o arquivo auth.js
 const authService = new AuthService();
 
@@ -35,5 +48,24 @@ router.post('/login', function(req, res){
   UserController.login(req, res);
 });
 
+//Roda de Criar Deposito
+router.post('/deposito/create', function(req, res){
+  DepositoController.Create(req, res);
+});
+
+//Roda de login
+router.post('/deposito/update', function(req, res){
+  DepositoController.update(req, res);
+});
+
+
+// Rotas para o gerenciamento de estoque
+router.post('/estoque/adicionar', function(req, res){
+  StockController.addProductToStock(req, res);
+});
+
+router.post('/estoque/remover', function(req, res){
+  StockController.removeProductFromStock(req, res);
+});
 
 module.exports = router;

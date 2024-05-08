@@ -2,20 +2,20 @@
 
 const Sequelize = require('sequelize');
 module.exports = (sequelize) => {
-    const Stock = sequelize.define('Stock', {
+    const Deposito = sequelize.define('Deposito', {
         id:{
             type: Sequelize.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-        productId:{
-            type: Sequelize.INTEGER,
+        nome:{
+            type: Sequelize.STRING,
             allowNull: false,
         },
-        quantidade:{
-            type: Sequelize.INTEGER,
+        ativo:{
+            type: Sequelize.BOOLEAN,
             allowNull: false,
         }
     });
-    return Stock;
+    return Deposito;
 }
