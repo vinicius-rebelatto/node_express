@@ -21,12 +21,33 @@ class DepositoService {
         }
     }
 
-    async update(DepositoId, nome, ativo) {
+    async update(DepositoId , nome, ativo) {
         try{
-            const deposit = await this.depositoModel.findOne({ where: { DepositoId } });
+            const deposit = await this.depositoModel.findOne({ where: { id: DepositoId } });
             deposit.nome = nome;
             deposit.ativo = ativo;
             await deposit.save();
+        }
+        catch(error){
+            throw error;
+        }
+    }
+
+    async findAll(){
+        try{
+            const allDeposits = await this.depositoModel.findAll();
+            return allDeposits? allDeposits: null;
+        }
+        catch(error)
+        {
+            throw error;
+        }
+    }
+
+    async findById(DepositoId) {
+        try{
+            const deposit = await this.depositoModel.findByPk(DepositoId);
+            return deposit? deposit: deposit;
         }
         catch(error){
             throw error;

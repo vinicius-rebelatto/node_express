@@ -1,27 +1,27 @@
 // ./controllers/depositoController.js
 
-class depositoController {
-    constructor(depositoService) {
-        this.depositoService = depositoService;
+class ProductController {
+    constructor(productService) {
+        this.productService = productService;
     }
 
 
     async Create(req, res) {
         const {nome} = req.body;
         try{
-            const novoDeposito = await this.depositoService.create(nome);
-            res.status(200).json(novoDeposito);
+            const newProduct = await this.productService.create(nome);
+            res.status(200).json(newProduct);
         }
         catch(erro){
-            res.status(500).json({error: 'Erro ao criar novo depósito'})
+            res.status(500).json({error: 'Erro ao criar novo produto'})
         }
     }
 
     async update(req, res) {
-        const {DepositoId, nome, ativo} = req.body;
+        const {productId, nome, ativo} = req.body;
         try{
-            const novoDeposito = await this.depositoService.update(DepositoId, nome, ativo);
-            res.status(200).json(novoDeposito);
+            const product = await this.productService.update(productId, nome, ativo);
+            res.status(200).json(product);
         }
         catch(erro){
             res.status(500).json({error: erro.message})
@@ -33,8 +33,8 @@ class depositoController {
         //const {login, senha} = req.body;
         try
         {
-            const allDeposits = await this.depositoService.findAll();
-            res.status(200).json(allDeposits);
+            const allProducts = await this.productService.findAll();
+            res.status(200).json(allProducts);
         }
         catch (erro)
         {
@@ -43,10 +43,10 @@ class depositoController {
     }
 
     async findById(req, res) {
-        const {DepositoId} = req.body;
+        const {productId} = req.body;
         try{
-            const novoDeposito = await this.depositoService.findById(DepositoId);
-            res.status(200).json(novoDeposito);
+            const product = await this.productService.findById(productId);
+            res.status(200).json(product);
         }
         catch(erro){
             res.status(500).json({error: erro.message})
@@ -55,4 +55,4 @@ class depositoController {
     }
 
 }
-module.exports = depositoController;
+module.exports = ProductController;

@@ -1,5 +1,7 @@
 // ./models/stock.js
 
+const db = require('../models');
+
 const Sequelize = require('sequelize');
 module.exports = (sequelize) => {
     const Deposito = sequelize.define('Deposito', {
@@ -17,5 +19,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         }
     });
+
+
     return Deposito;
 }

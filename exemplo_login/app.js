@@ -28,13 +28,19 @@ async function ApplyMigrations(){
             alter:true
         };
     
-        await db.sequelize.sync({
-            alter: migration_config.alter
-        });
+        // await db.sequelize.sync({
+        //     alter: migration_config.alter
+        // });
+
+        await db.User.sync();
+        await db.Product.sync();
+        await db.Deposito.sync();
+        await db.Movimento.sync();
+        
         console.log('Sincronizado com susexo');
     }
     catch(error){
-        console.log('Erro sincronizando o banco de dados')
+        console.log({error: error.message})
     }
 }
 

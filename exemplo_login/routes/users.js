@@ -18,6 +18,13 @@ const DepositoService = new depositoService(db.Deposito);//Contrução do objeto
 const depositoController = require('../controllers/depositoController');//Classe
 const DepositoController = new depositoController(DepositoService);//Contrução do objeto
 
+//Chamada das classes de produto
+
+const productService = require('../services/productService');//Classe
+const ProductService = new productService(db.Product);//Contrução do objeto
+const productController = require('../controllers/productController');//Classe
+const ProductController = new productController(ProductService);//Contrução do objeto
+
 
 const AuthService = require('../services/auth'); // Caminho para o arquivo auth.js
 const authService = new AuthService();
@@ -53,19 +60,33 @@ router.post('/deposito/create', function(req, res){
   DepositoController.Create(req, res);
 });
 
-//Roda de login
 router.post('/deposito/update', function(req, res){
   DepositoController.update(req, res);
 });
 
-
-// Rotas para o gerenciamento de estoque
-router.post('/estoque/adicionar', function(req, res){
-  StockController.addProductToStock(req, res);
+router.get('/deposito/findall', function(req, res){
+  DepositoController.findAll(req, res);
 });
 
-router.post('/estoque/remover', function(req, res){
-  StockController.removeProductFromStock(req, res);
+router.get('/deposito/findbyid', function(req, res){
+  DepositoController.findById(req, res);
+});
+
+//Roda Produtos
+router.post('/product/create', function(req, res){
+  ProductController.Create(req, res);
+});
+
+router.post('/product/update', function(req, res){
+  ProductController.update(req, res);
+});
+
+router.get('/product/findall', function(req, res){
+  ProductController.findAll(req, res);
+});
+
+router.get('/product/findbyid', function(req, res){
+  ProductController.findById(req, res);
 });
 
 module.exports = router;
