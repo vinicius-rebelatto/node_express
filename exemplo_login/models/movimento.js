@@ -25,10 +25,11 @@ module.exports = (sequelize) => {
             },
             allowNull: false,
         },
-        tipomovimento:{
-            type: Sequelize.STRING,
+        tipo: {
+            type: Sequelize.ENUM,
+            values: ['entrada', 'saída'],
             allowNull: false,
-        },
+          },
         qtd:{
             type: Sequelize.INTEGER,
             allowNull: false,

@@ -25,6 +25,13 @@ const ProductService = new productService(db.Product);//Contrução do objeto
 const productController = require('../controllers/productController');//Classe
 const ProductController = new productController(ProductService);//Contrução do objeto
 
+//Chamada das classes de movimento
+
+const movimentoService = require('../services/movimentoService');//Classe
+const MovimentoService = new movimentoService(db.Movimento);//Contrução do objeto
+const movimentoController = require('../controllers/movimentoController');//Classe
+const MovimentoController = new movimentoController(MovimentoService);//Contrução do objeto
+
 
 const AuthService = require('../services/auth'); // Caminho para o arquivo auth.js
 const authService = new AuthService();
@@ -50,12 +57,14 @@ router.get('/localizaPeloID', function(req,res,next){
   UserController.localizaPeloID(req, res)
 })
 
-//Roda de login
+//Rota de login
 router.post('/login', function(req, res){
   UserController.login(req, res);
 });
 
-//Roda de Criar Deposito
+
+
+//Rota de Criar Deposito
 router.post('/deposito/create', function(req, res){
   DepositoController.Create(req, res);
 });
@@ -72,7 +81,9 @@ router.get('/deposito/findbyid', function(req, res){
   DepositoController.findById(req, res);
 });
 
-//Roda Produtos
+
+
+//Rota Produtos
 router.post('/product/create', function(req, res){
   ProductController.Create(req, res);
 });
@@ -87,6 +98,12 @@ router.get('/product/findall', function(req, res){
 
 router.get('/product/findbyid', function(req, res){
   ProductController.findById(req, res);
+});
+
+
+//Rota de movimentos
+router.post('/movimento/create', function(req, res){
+  MovimentoController.Create(req, res);
 });
 
 module.exports = router;

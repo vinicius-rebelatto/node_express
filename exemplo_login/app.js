@@ -27,15 +27,15 @@ async function ApplyMigrations(){
             create:true,
             alter:true
         };
-    
-        // await db.sequelize.sync({
-        //     alter: migration_config.alter
-        // });
 
-        await db.User.sync();
-        await db.Product.sync();
-        await db.Deposito.sync();
-        await db.Movimento.sync();
+         await db.User.sync();
+         await db.Product.sync();
+         await db.Deposito.sync();
+         await db.Movimento.sync();
+
+        await db.sequelize.sync({
+            alter: migration_config.alter
+        });
         
         console.log('Sincronizado com susexo');
     }
