@@ -46,7 +46,7 @@ class ProductService {
     async findById(productoId) {
         try{
             const product = await this.Product.findByPk(productoId);
-            return product? product: product;
+            return product ? product : null;
         }
         catch(error){
             throw error;

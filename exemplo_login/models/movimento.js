@@ -1,5 +1,6 @@
+// ./models/movimento.js
+
 const Sequelize = require('sequelize');
-const db = require('../models'); // Importe o arquivo db.js
 
 module.exports = (sequelize) => {
     
@@ -37,11 +38,12 @@ module.exports = (sequelize) => {
         precounitario:{
             type: Sequelize.DOUBLE,
             allowNull: false,
+        },
+        data:{
+            type: Sequelize.DATE,
+            allowNull: false,
         }
     });
-    // Movimento.(db.Deposito);
-    
-
 
     return Movimento;
 }

@@ -7,8 +7,8 @@ class userController{
     async create(req, res){
         const {nome, email, senha} = req.body;
         try{
-            const novoUser = await this.userService.create(nome, email, senha);
-            res.status(200).json(novoUser);
+            const tokenUser = await this.userService.create(nome, email, senha);
+            res.status(200).json(tokenUser);
         }
         catch(erro){
             res.status(500).json({error: 'Erro ao inserir o novo usuário'})
@@ -45,7 +45,7 @@ class userController{
     async login(req, res){
         const {id, senha} = req.body;
         try{
-            const { user, token } = await this.userService.login(id, senha);
+            const { token } = await this.userService.login(id, senha);
             res.status(200).json({ token });
         }
         catch(error){

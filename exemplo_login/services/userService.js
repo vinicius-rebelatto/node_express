@@ -22,7 +22,9 @@ class userService{
                     senha:hashedPassword
                 }
             );
-            return novoUser ? novoUser : null
+            const token = authService.generateToken(novoUser.id);
+                    return { token };
+            //return novoUser ? novoUser : null
 
         }
         catch(error){
@@ -67,7 +69,7 @@ class userService{
                 const match = await bcrypt.compare(senha, user.senha);
                 if(match){
                     const token = authService.generateToken(user.id);
-                    return { user, token };
+                    return { token };
                 }
                 else{
                     throw new Error('Senha incorreta');

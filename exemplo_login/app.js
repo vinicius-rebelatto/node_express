@@ -6,6 +6,11 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var productsRouter = require('./routes/products');
+var depositosRouter = require('./routes/depositos');
+var movimentosRouter = require('./routes/movimentos');
+var coastCenterRouter = require('./routes/coastCenter');
+var supplierRouter = require('./routes/supplier');
 
 var app = express();
 
@@ -15,8 +20,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+//Deinição das Rotas da aplicação
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/products', productsRouter);
+app.use('/depositos', depositosRouter);
+app.use('/movimentos', movimentosRouter);
+app.use('/coastcenter', coastCenterRouter);
+app.use('/supplier', supplierRouter);
 
 const db = require('./models');
 //module.exports = app;
@@ -32,6 +44,7 @@ async function ApplyMigrations(){
          await db.Product.sync();
          await db.Deposito.sync();
          await db.Movimento.sync();
+         await db.CoastCenter.sync();
 
         await db.sequelize.sync({
             alter: migration_config.alter

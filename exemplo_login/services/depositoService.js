@@ -27,6 +27,7 @@ class DepositoService {
             deposit.nome = nome;
             deposit.ativo = ativo;
             await deposit.save();
+            return "Atualizado com sucesso";
         }
         catch(error){
             throw error;
