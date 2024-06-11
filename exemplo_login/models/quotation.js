@@ -1,16 +1,16 @@
 const Sequelize = require('sequelize');
 
 module.exports = (sequelize) => {
-    const ReqCompra = sequelize.define('ReqCompra', {
+    const Quotation = sequelize.define('Quotation', {
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-        userid: {
+        reqid: {
             type: Sequelize.INTEGER,
             references: {
-                model: 'users', // Verifique se o nome da tabela é 'users'
+                model: 'reqcompras', // Verifique se o nome da tabela é 'users'
                 key: 'id',
             },
             allowNull: false,
@@ -18,23 +18,28 @@ module.exports = (sequelize) => {
         productid: {
             type: Sequelize.INTEGER,
             references: {
-                model: 'products', // Verifique se o nome da tabela é 'products'
+                model: 'products', 
                 key: 'id',
             },
             allowNull: false,
         },
-        qtdReq: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-        },
-        coastcenterid: {
+        supplierid: {
             type: Sequelize.INTEGER,
             references: {
-                model: 'coastcenters', // Verifique se o nome da tabela é 'coastcenters'
+                model: 'suppliers', 
                 key: 'id',
             },
+            allowNull: false,
+        },
+        unitPrice: {
+            type: Sequelize.DOUBLE,
+            allowNull: false,
+        },
+        validUntil: {
+            type: Sequelize.DATE,
+            allowNull: false,
         },
     });
 
-    return ReqCompra;
+    return Quotation;
 };

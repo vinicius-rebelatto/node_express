@@ -1,19 +1,21 @@
 // ./services/SupplieroService.js
 
-class SupplierService {
-    constructor(Supplier) {
-        this.Supplier = Supplier;
+class PurchaseService {
+    constructor(Purchase) {
+        this.Purchase = Purchase;
     }
 
-    async create(nome, telephone) {
+    async create(reqid, productid, qtdReq) {
         try{
-            const newSupplier = await this.Supplier.create(
+            const newPurchase = await this.Purchase.create(
                 {
-                    name: nome,
-                    telephone: telephone
+                    reqid: reqid,
+                    productid: productid,
+                    qtdReq: qtdReq,
+                    status: 'pendente'
                 }
             );
-            return newSupplier ? newSupplier : null
+            return newPurchase ? newPurchase : null
         }
         catch(error){
             throw error;
@@ -48,4 +50,4 @@ class SupplierService {
     }
 }
 
-module.exports = SupplierService;
+module.exports = PurchaseService;

@@ -11,6 +11,8 @@ var depositosRouter = require('./routes/depositos');
 var movimentosRouter = require('./routes/movimentos');
 var coastCenterRouter = require('./routes/coastCenter');
 var supplierRouter = require('./routes/supplier');
+var reqCompraRouter = require('./routes/reqcompra');
+var quotationRouter = require('./routes/quotation');
 
 var app = express();
 
@@ -29,6 +31,8 @@ app.use('/depositos', depositosRouter);
 app.use('/movimentos', movimentosRouter);
 app.use('/coastcenter', coastCenterRouter);
 app.use('/supplier', supplierRouter);
+app.use('/purchaserequest', reqCompraRouter);
+app.use('/quotation', quotationRouter);
 
 const db = require('./models');
 //module.exports = app;
@@ -45,6 +49,9 @@ async function ApplyMigrations(){
          await db.Deposito.sync();
          await db.Movimento.sync();
          await db.CoastCenter.sync();
+         await db.ReqCompra.sync();
+         await db.Quotation.sync();
+         await db.Purchase.sync();
 
         await db.sequelize.sync({
             alter: migration_config.alter

@@ -52,27 +52,16 @@ class CoastCenterService {
             throw error();
         }
     }
- 
-    /*async findAll(){
-        try{
-            const allCoastCenters = await this.CoastCenter.findAll();
-            return allCoastCenters? allCoastCenters: null;
-        }
-        catch(error)
-        {
-            throw error;
-        }
-    }
 
-    async findById(CoastCenteroId) {
+    async findById(coastCenteroId) {
         try{
-            const CoastCenter = await this.CoastCenter.findByPk(CoastCenteroId);
-            return CoastCenter ? CoastCenter : null;
+            const coastCenter = await this.CoastCenter.findByPk(coastCenteroId);
+            return coastCenter ? coastCenter : null;
         }
         catch(error){
             throw error;
         }
-    }*/
+    }
 }
 
 module.exports = CoastCenterService;
