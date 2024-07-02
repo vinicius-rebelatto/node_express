@@ -52,6 +52,7 @@ async function ApplyMigrations(){
          await db.ReqCompra.sync();
          await db.Quotation.sync();
          await db.Purchase.sync();
+         await db.EndPurchase.sync();
 
         await db.sequelize.sync({
             alter: migration_config.alter

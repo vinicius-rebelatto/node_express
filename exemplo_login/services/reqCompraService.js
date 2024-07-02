@@ -6,8 +6,7 @@ const productService = require('../services/productService');//Classe
 const ProductService = new productService(db.Product);//Contrução do objeto
 const coastCenterService = require('../services/coastCenterService');//Classe
 const CoastCenterService = new coastCenterService(db.CoastCenter);//Contrução do objeto
-const purchaseService = require('../services/purchaseService');//Classe
-const PurchaseService = new purchaseService(db.Purchase);//Contrução do objeto
+
 
 
 class ReqCompraService {

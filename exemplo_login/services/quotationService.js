@@ -4,6 +4,8 @@ const productService = require('./productService');//Classe
 const ProductService = new productService(db.Product);//Contrução do objeto
 const supplierService = require('./supplierService');//Classe
 const SupplierService = new supplierService(db.Supplier);//Contrução do objeto
+const purchaseService = require('../services/purchaseService');//Classe
+const PurchaseService = new purchaseService(db.Purchase);//Contrução do objeto
 
 
 class QuotationService {
@@ -27,12 +29,12 @@ class QuotationService {
             const supplier = await SupplierService.findById(supplierid);
             quote.supplierid = supplier.name;
             quote.productid = product.nome;
-            const allQuotes = this.findByRequest(reqid);
-            if (this.validateQuotations(allQuotes)) {
-                return allQuotes[0];
+            const allQuotes = await this.findByRequest(reqid);
+            if (await this.validateQuotations(allQuotes)) {
+                return PurchaseService.close(allQuotes[0]);
             }
             else {
-                return quote ? quote : null
+                return quote ? quote : null;
             }
         }
         catch(error){

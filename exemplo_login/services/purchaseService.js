@@ -1,4 +1,4 @@
-// ./services/SupplieroService.js
+
 
 class PurchaseService {
     constructor(Purchase) {
@@ -22,29 +22,27 @@ class PurchaseService {
         }
     }
 
-    async update(supplierId , nome, telephone) {
+    async close(quote) {
         try{
-            const supplier = await this.Supplier.findOne({ where: { id: supplierId } });
-            supplier.name = nome;                
-            if (telephone === null) {
-                supplier.telephone;
-            }else{
-                supplier.telephone = telephone;
-            }
-            await supplier.save();
-            return supplier;
+            const purchase = await this.findByRequest(quote.reqid);
+            purchase.supplierid = quote.supplierid;
+            purchase.status = 'encerrado';
+            purchase.unitPrice = quote.unitPrice;
+            await purchase.save();
+            return purchase;
         }
         catch(error){
             throw error;
         }
     }
 
-    async findById(id) {
+    async findByRequest(reqid){
         try{
-            const supplier = await this.Supplier.findByPk(id);
-            return supplier ? supplier : null;
+            const request = await this.Purchase.findOne({ where: { reqid: reqid } });
+            return request;
         }
-        catch(error){
+        catch(error)
+        {
             throw error;
         }
     }
