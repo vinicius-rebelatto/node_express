@@ -50,6 +50,7 @@ async function ApplyMigrations(){
          await db.Movimento.sync();
          await db.CoastCenter.sync();
          await db.ReqCompra.sync();
+         await db.Supplier.sync();
          await db.Quotation.sync();
          await db.Purchase.sync();
          await db.EndPurchase.sync();

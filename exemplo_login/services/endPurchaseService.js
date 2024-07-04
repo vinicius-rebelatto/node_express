@@ -1,24 +1,29 @@
 // ./services/SupplieroService.js
+const db = require('../models');
 const purchaseService = require('../services/purchaseService');//Classe
-const PurchaseService = new purchaseService(db.Quotation);//Contrução do objeto
+const PurchaseService = new purchaseService(db.Purchase);//Contrução do objeto
 
 
 class EndPurchaseService {
-    constructor(Purchase) {
-        this.Purchase = Purchase;
+    constructor(EndPurchase) {
+        this.EndPurchase = EndPurchase;
     }
 
     async create(purchaseid, parcelas) {
         try{
-            const quote = await QuotationService.findById(purchaseid);
-            const newPurchase = await this.Purchase.create(
+            const purchase = await PurchaseService.findById(purchaseid);
+            const newPurchase = await this.EndPurchase.create(
                 {
-                    reqid: reqid,
-                    productid: productid,
-                    qtdReq: qtdReq,
-                    status: 'pendente'
+                    purchaseId: purchaseid,
+                    productid: purchase.productid,
+                    qtdReq: purchase.qtdReq,
+                    unitPrice: purchase.unitPrice,
+                    parcelas: parcelas,
+                    fiscalNote: purchaseid
                 }
             );
+            purchase.status = 'encerrado';
+            await purchase.save();
             return newPurchase ? newPurchase : null
         }
         catch(error){

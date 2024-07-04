@@ -46,6 +46,15 @@ class PurchaseService {
             throw error;
         }
     }
+
+    async findById(id) {
+        try {
+            const purchase = await this.Purchase.findByPk(id);
+            return purchase;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 module.exports = PurchaseService;

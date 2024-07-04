@@ -13,7 +13,7 @@ class ProductController {
             res.status(200).json(newProduct);
         }
         catch(erro){
-            res.status(500).json({error: 'Erro ao criar novo produto'})
+            res.status(500).json({error: erro.message})
         }
     }
 
